@@ -6,7 +6,8 @@ var player : Player #a variable that HAS to be of Class 'Player' - this is stric
 var next_state : PlayerState
 
 #region /// state references
-# reference to all other states
+@onready var run: PlayerStateRun = %Run
+@onready var idle: PlayerStateIdle = %Idle
 #endregion 
 
 #What happens when this state is initialised?

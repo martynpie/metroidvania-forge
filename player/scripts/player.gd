@@ -1,5 +1,10 @@
 class_name Player extends CharacterBody2D
 
+#region /// Export Vairable
+@export var move_speed : float = 150
+
+#endregion
+
 #region /// State Machine Variables
 var states : Array[ PlayerState ]
 var current_state : PlayerState : 
@@ -58,6 +63,7 @@ func initialise_states() -> void:
 	#set our first state
 	change_state( current_state )
 	current_state.enter()
+	$Label.text = current_state.name
 	pass
 
 
@@ -73,12 +79,15 @@ func change_state( new_state : PlayerState ) -> void:
 	states.push_front( new_state ) #push front is a sausage machine function for arrays, putting the new state to the front and shunting everything else to suit
 	current_state.enter()
 	states.resize( 3 ) #keeps the size of the states array at 3, so we're not just adding thousands of states
+	$Label.text = current_state.name
 	pass
 
 
 func update_direction() -> void:
 	#var prev_direction : Vector2 = direction
-	direction = Input.get_vector( "left" , "right" , "up" , "down" )
-	
+	#direction = Input.get_vector( "left" , "right" , "up" , "down" )
+	var x_axis = Input.get_axis("left","right")
+	var y_axis = Input.get_axis("up","down")
+	direction = Vector2(x_axis,y_axis)
 	#do more stuff later
 	pass

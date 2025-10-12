@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dtbosehmi0bt2" path="res://player/scripts/player.gd" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://55xw6dqq6fdy" path="res://player/states/idle.gd" id="2_rkbax"]
-[ext_resource type="Script" uid="uid://bvtccng77ab6g" path="res://player/states/run.gd" id="3_g1dw6"]
+[ext_resource type="Script" uid="uid://8wf8t8p8nl4d" path="res://player/states/run.gd" id="3_g1dw6"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_kqu6x"]
 size = Vector2(18, 48)
@@ -13,6 +13,22 @@ size = Vector2(16, 46)
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_oul6g")
 
+[node name="States" type="Node" parent="."]
+
+[node name="Idle" type="Node" parent="States"]
+unique_name_in_owner = true
+script = ExtResource("2_rkbax")
+
+[node name="Run" type="Node" parent="States"]
+unique_name_in_owner = true
+script = ExtResource("3_g1dw6")
+
+[node name="Jump" type="Node" parent="States"]
+unique_name_in_owner = true
+
+[node name="Fall" type="Node" parent="States"]
+unique_name_in_owner = true
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -24)
 texture = SubResource("PlaceholderTexture2D_kqu6x")
@@ -22,10 +38,11 @@ position = Vector2(0, -23)
 shape = SubResource("RectangleShape2D_oul6g")
 debug_color = Color(0, 0.6, 0.69803923, 0.21960784)
 
-[node name="States" type="Node" parent="."]
-
-[node name="Idle" type="Node" parent="States"]
-script = ExtResource("2_rkbax")
-
-[node name="Run" type="Node" parent="States"]
-script = ExtResource("3_g1dw6")
+[node name="Label" type="Label" parent="."]
+offset_left = -18.0
+offset_top = -71.0
+offset_right = 18.0
+offset_bottom = -55.0
+theme_override_font_sizes/font_size = 10
+text = "label"
+horizontal_alignment = 1
