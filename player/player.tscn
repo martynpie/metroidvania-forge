@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cfa3xni5hj64u"]
+[gd_scene load_steps=8 format=3 uid="uid://cfa3xni5hj64u"]
 
 [ext_resource type="Script" uid="uid://dtbosehmi0bt2" path="res://player/scripts/player.gd" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://55xw6dqq6fdy" path="res://player/states/idle.gd" id="2_rkbax"]
 [ext_resource type="Script" uid="uid://8wf8t8p8nl4d" path="res://player/states/run.gd" id="3_g1dw6"]
+[ext_resource type="Script" uid="uid://dkoy7odyhw81o" path="res://player/states/jump.gd" id="4_yw30f"]
+[ext_resource type="Script" uid="uid://s4u1sxy5x8fq" path="res://player/states/fall.gd" id="5_qjkh3"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_kqu6x"]
 size = Vector2(18, 48)
@@ -12,6 +14,7 @@ size = Vector2(16, 46)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_oul6g")
+jump_speed_modifier = 0.8
 
 [node name="States" type="Node" parent="."]
 
@@ -25,9 +28,11 @@ script = ExtResource("3_g1dw6")
 
 [node name="Jump" type="Node" parent="States"]
 unique_name_in_owner = true
+script = ExtResource("4_yw30f")
 
 [node name="Fall" type="Node" parent="States"]
 unique_name_in_owner = true
+script = ExtResource("5_qjkh3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -24)
