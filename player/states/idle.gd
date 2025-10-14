@@ -8,6 +8,7 @@ func init() -> void:
 #What happens when we enter this state?
 func enter() -> void:
 	#Play idle animation
+	fall.coyote_counter = 1 #Homework
 	pass
 
 #What happens when we exit this state?
