@@ -12,7 +12,6 @@ func enter() -> void:
 #play animation
 	player.add_debug_indicator(Color.LIME_GREEN)
 	player.velocity.y = -jump_velocity
-	fall.coyote_counter = 0 #Homework
 	pass
 
 #What happens when we exit this state?
