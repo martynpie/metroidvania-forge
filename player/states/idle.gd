@@ -18,12 +18,15 @@ func exit() -> void:
 func handle_input( _event : InputEvent ) -> PlayerState:
 	if _event.is_action_pressed( "jump" ):
 		return jump
+	if _event.is_action_pressed( "down" ):
+		return crouch
 	return next_state
 
 #What happens each process tick in this state?
 func process( _delta: float ) -> PlayerState:
 	if player.direction.x != 0:
 		return run
+	
 	return next_state
 
 #What happens each physics_process tick in this state?

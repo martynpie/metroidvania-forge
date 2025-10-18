@@ -29,6 +29,7 @@ func exit() -> void:
 
 #What happens when an input is pressed?
 func handle_input( _event : InputEvent )-> PlayerState:
+
 	if _event.is_action_pressed( "jump" ):
 		if coyote_timer > 0:
 			return jump
@@ -40,14 +41,27 @@ func handle_input( _event : InputEvent )-> PlayerState:
 func process( _delta: float ) -> PlayerState:
 	buffer_timer -= _delta
 	coyote_timer -= _delta
+
 	return next_state
 
 #What happens each physics_process tick in this state?
 func physics_process( _delta: float ) -> PlayerState:
+	if crouch.dropping_through == true:
+		crouch.drop_timer -= _delta
+		if crouch.drop_timer <= 0:
+			end_drop_through()
 	if player.is_on_floor():
 		player.add_debug_indicator(Color.BURLYWOOD)
 		if buffer_timer > 0:
 			return jump
-		return idle
+		if Input.is_action_pressed( "down" ):
+				return crouch
+		else:
+			return idle
 	player.velocity.x = player.direction.x * player.move_speed * player.jump_speed_modifier
 	return next_state
+	
+func end_drop_through() -> void:
+	player.collision_shape_2d.disabled = false
+	crouch.dropping_through = false
+	pass

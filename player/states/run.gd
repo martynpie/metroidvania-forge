@@ -17,6 +17,8 @@ func exit() -> void:
 func handle_input( _event : InputEvent ) -> PlayerState:
 	if _event.is_action_pressed( "jump" ):
 		return jump
+	if _event.is_action_pressed( "down" ):
+		return crouch
 	return next_state
 
 #What happens each process tick in this state?

@@ -2,6 +2,7 @@ class_name Player extends CharacterBody2D
 
 const DEBUG_JUMP_INDICATOR = preload("uid://1n5lkptfbcul")
 
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 
 #region /// Export Vairable
@@ -42,7 +43,7 @@ func _process( _delta : float ) -> void:
 
 func _physics_process( _delta : float ) -> void:
 	velocity.y += gravity * _delta * gravity_multiplier
-	move_and_slide()
+	move_and_slide()	
 	change_state( current_state.physics_process( _delta ) )
 	pass
 

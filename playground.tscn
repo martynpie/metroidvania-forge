@@ -45,25 +45,27 @@ texture = SubResource("GradientTexture2D_rupst")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D4/StaticBody2D"]
 shape = SubResource("RectangleShape2D_wt17y")
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
+[node name="Sprite2D2ONE WAY" type="Sprite2D" parent="."]
 position = Vector2(124.750015, 156.5)
 scale = Vector2(5.2031236, 0.59374994)
 texture = SubResource("GradientTexture2D_rupst")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D2"]
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D2ONE WAY"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D2/StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D2ONE WAY/StaticBody2D"]
 shape = SubResource("RectangleShape2D_wt17y")
+one_way_collision = true
 
-[node name="Sprite2D5" type="Sprite2D" parent="."]
-position = Vector2(216, 198)
-scale = Vector2(5.2031236, 0.59374994)
+[node name="Sprite2D5ONEWAY" type="Sprite2D" parent="."]
+position = Vector2(343, 93)
+scale = Vector2(5.039062, 0.59374994)
 texture = SubResource("GradientTexture2D_rupst")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D5"]
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D5ONEWAY"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D5/StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D5ONEWAY/StaticBody2D"]
 shape = SubResource("RectangleShape2D_wt17y")
+one_way_collision = true
 
 [node name="Player" parent="." instance=ExtResource("1_rupst")]
 position = Vector2(123, 112)
