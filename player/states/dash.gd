@@ -1,5 +1,7 @@
-class_name PlayerStateIdle extends PlayerState
+class_name PlayerStateDash extends PlayerState
 
+@export var dash_cooldown : float = 0.3
+@export var dash_velocity : int = 450
 
 #What happens when this state is initialised?
 func init() -> void:
@@ -7,7 +9,8 @@ func init() -> void:
 
 #What happens when we enter this state?
 func enter() -> void:
-	#Play idle animation
+	#Play dash animation
+	
 	pass
 
 #What happens when we exit this state?
@@ -16,16 +19,13 @@ func exit() -> void:
 
 #What happens when an input is pressed?
 func handle_input( _event : InputEvent ) -> PlayerState:
-	if _event.is_action_pressed( "jump" ):
-		return jump
 	return next_state
 
 #What happens each process tick in this state?
 func process( _delta: float ) -> PlayerState:
 	if player.direction.x != 0:
 		return run
-	elif player.direction.y > 0.5:
-		return crouch
+	
 	return next_state
 
 #What happens each physics_process tick in this state?

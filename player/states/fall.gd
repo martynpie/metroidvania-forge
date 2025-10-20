@@ -46,10 +46,6 @@ func process( _delta: float ) -> PlayerState:
 
 #What happens each physics_process tick in this state?
 func physics_process( _delta: float ) -> PlayerState:
-	if crouch.dropping_through == true:
-		crouch.drop_timer -= _delta
-		if crouch.drop_timer <= 0:
-			end_drop_through()
 	if player.is_on_floor():
 		player.add_debug_indicator(Color.BURLYWOOD)
 		if buffer_timer > 0:
@@ -61,7 +57,3 @@ func physics_process( _delta: float ) -> PlayerState:
 	player.velocity.x = player.direction.x * player.move_speed * player.jump_speed_modifier
 	return next_state
 	
-func end_drop_through() -> void:
-	player.collision_shape_2d.disabled = false
-	crouch.dropping_through = false
-	pass
