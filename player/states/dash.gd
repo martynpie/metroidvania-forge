@@ -1,7 +1,7 @@
 class_name PlayerStateDash extends PlayerState
 
 @export var dash_cooldown : float = 0.3
-@export var dash_velocity : int = 450
+@export var dash_velocity : int = 1000
 
 #What happens when this state is initialised?
 func init() -> void:
@@ -10,7 +10,7 @@ func init() -> void:
 #What happens when we enter this state?
 func enter() -> void:
 	#Play dash animation
-	
+	player.velocity.x = dash_velocity
 	pass
 
 #What happens when we exit this state?

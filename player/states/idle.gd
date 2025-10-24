@@ -8,6 +8,7 @@ func init() -> void:
 #What happens when we enter this state?
 func enter() -> void:
 	#Play idle animation
+	player.animation_player.play( "idle" )
 	pass
 
 #What happens when we exit this state?
@@ -18,6 +19,8 @@ func exit() -> void:
 func handle_input( _event : InputEvent ) -> PlayerState:
 	if _event.is_action_pressed( "jump" ):
 		return jump
+	if _event.is_action_pressed( "dash" ):
+		return dash
 	return next_state
 
 #What happens each process tick in this state?

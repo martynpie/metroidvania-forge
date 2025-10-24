@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cfa3xni5hj64u"]
+[gd_scene load_steps=18 format=3 uid="uid://cfa3xni5hj64u"]
 
 [ext_resource type="Script" uid="uid://dtbosehmi0bt2" path="res://player/scripts/player.gd" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://55xw6dqq6fdy" path="res://player/states/idle.gd" id="2_rkbax"]
@@ -7,15 +7,107 @@
 [ext_resource type="Script" uid="uid://s4u1sxy5x8fq" path="res://player/states/fall.gd" id="5_qjkh3"]
 [ext_resource type="Script" uid="uid://m07plq4p61n0" path="res://player/states/crouch.gd" id="6_g6k8r"]
 [ext_resource type="Script" uid="uid://ln641dgt6pk6" path="res://player/states/dash.gd" id="7_boad6"]
+[ext_resource type="Texture2D" uid="uid://c0sdtmvoisb8y" path="res://player/sprites/hero-mp.png" id="8_rgyib"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_kqu6x"]
-size = Vector2(18, 48)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rgyib"]
+radius = 8.0
+height = 46.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_oul6g"]
-size = Vector2(16, 46)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hg6s5"]
+radius = 8.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_boad6"]
-size = Vector2(16, 30)
+[sub_resource type="Animation" id="Animation_rgyib"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [11]
+}
+
+[sub_resource type="Animation" id="Animation_hg6s5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [11]
+}
+
+[sub_resource type="Animation" id="Animation_8t03j"]
+resource_name = "run"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [14, 15, 16, 17, 18, 19, 12, 13]
+}
+
+[sub_resource type="Animation" id="Animation_2ieo8"]
+resource_name = "jump"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [24, 25, 26, 27, 28]
+}
+
+[sub_resource type="Animation" id="Animation_ebec5"]
+resource_name = "crouch"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [20, 21, 22, 23]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yllr7"]
+_data = {
+&"RESET": SubResource("Animation_hg6s5"),
+&"crouch": SubResource("Animation_ebec5"),
+&"idle": SubResource("Animation_rgyib"),
+&"jump": SubResource("Animation_2ieo8"),
+&"run": SubResource("Animation_8t03j")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rgyib"]
+size = Vector2(16, 3)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 0
@@ -50,17 +142,20 @@ unique_name_in_owner = true
 script = ExtResource("7_boad6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -24)
-texture = SubResource("PlaceholderTexture2D_kqu6x")
+position = Vector2(0, -39)
+texture = ExtResource("8_rgyib")
+hframes = 16
+vframes = 4
+frame = 11
 
 [node name="CollisionStand" type="CollisionShape2D" parent="."]
 position = Vector2(0, -23)
-shape = SubResource("RectangleShape2D_oul6g")
+shape = SubResource("CapsuleShape2D_rgyib")
 debug_color = Color(0, 0.6, 0.69803923, 0.21960784)
 
 [node name="CollisionCrouch" type="CollisionShape2D" parent="."]
 position = Vector2(0, -15)
-shape = SubResource("RectangleShape2D_boad6")
+shape = SubResource("CapsuleShape2D_hg6s5")
 disabled = true
 debug_color = Color(0, 0.6, 0.69803923, 0.21960784)
 
@@ -73,6 +168,15 @@ theme_override_font_sizes/font_size = 10
 text = "label"
 horizontal_alignment = 1
 
-[node name="OneWayPlatformRaycast" type="RayCast2D" parent="."]
-target_position = Vector2(0, 4)
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_yllr7")
+}
+autoplay = "idle"
+
+[node name="OneWayPlatformShapeCast" type="ShapeCast2D" parent="."]
+enabled = false
+shape = SubResource("RectangleShape2D_rgyib")
+target_position = Vector2(0, 6)
+max_results = 12
 collision_mask = 2

@@ -10,6 +10,7 @@ func init() -> void:
 #What happens when we enter this state?
 func enter() -> void:
 #play animation
+	player.animation_player.play( "jump" )
 	player.add_debug_indicator(Color.LIME_GREEN)
 	player.velocity.y = -jump_velocity
 	pass
@@ -24,6 +25,8 @@ func handle_input( event : InputEvent ) -> PlayerState:
 	if event.is_action_released( "jump" ):
 		player.velocity.y *= 0.35
 		return fall
+	if event.is_action_pressed( "dash" ):
+		return dash
 	return next_state
 
 #What happens each process tick in this state?
