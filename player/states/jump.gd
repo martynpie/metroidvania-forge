@@ -11,6 +11,7 @@ func init() -> void:
 func enter() -> void:
 #play animation
 	player.animation_player.play( "jump" )
+	player.animation_player.pause()
 	player.add_debug_indicator(Color.LIME_GREEN)
 	player.velocity.y = -jump_velocity
 	pass
@@ -31,7 +32,7 @@ func handle_input( event : InputEvent ) -> PlayerState:
 
 #What happens each process tick in this state?
 func process( _delta: float ) -> PlayerState:
-
+	set_jump_frame()
 	return next_state
 
 #What happens each physics_process tick in this state?
@@ -42,3 +43,9 @@ func physics_process( _delta: float ) -> PlayerState:
 		return fall
 	player.velocity.x = player.direction.x * player.move_speed * player.jump_speed_modifier
 	return next_state
+
+
+func set_jump_frame() -> void:
+	var frame : float = remap( player.velocity.y , -jump_velocity , 0.0 , 0.0 , 0.5 )
+	player.animation_player.seek( frame , true )
+	pass
