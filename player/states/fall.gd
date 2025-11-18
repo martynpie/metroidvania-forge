@@ -27,6 +27,7 @@ func enter() -> void:
 #What happens when we exit this state?
 func exit() -> void:
 	player.gravity_multiplier = 1.0
+	buffer_timer = 0
 	pass
 
 #What happens when an input is pressed?
@@ -49,7 +50,7 @@ func process( _delta: float ) -> PlayerState:
 #What happens each physics_process tick in this state?
 func physics_process( _delta: float ) -> PlayerState:
 	if player.is_on_floor():
-		player.add_debug_indicator(Color.BURLYWOOD)
+		#player.add_debug_indicator(Color.BURLYWOOD)
 		if buffer_timer > 0:
 			return jump
 		if Input.is_action_pressed( "down" ):

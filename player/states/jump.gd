@@ -12,13 +12,22 @@ func enter() -> void:
 #play animation
 	player.animation_player.play( "jump" )
 	player.animation_player.pause()
-	player.add_debug_indicator(Color.LIME_GREEN)
+	#player.add_debug_indicator(Color.LIME_GREEN)
 	player.velocity.y = -jump_velocity
+	
+	#Check if this is a buffer jump
+	#If it is, handle jump button release retroactively
+	if player.previous_state == fall and not Input.is_action_pressed( "jump" ):
+		await get_tree().physics_frame #wait for the next physics frame
+		player.velocity.y *= 0.5
+		player.change_state( fall )
+	
+	
 	pass
 
 #What happens when we exit this state?
 func exit() -> void:
-	player.add_debug_indicator(Color.BLUE_VIOLET)
+	#player.add_debug_indicator(Color.BLUE_VIOLET)
 	pass
 
 #What happens when an input is pressed?
